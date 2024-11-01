@@ -10,10 +10,10 @@ html {
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
   background-color: grey;
   display: grid;
+  min-height: 100vh;
   grid-template-rows: auto 1fr auto;
   text-align: center;
 }
@@ -27,41 +27,71 @@ main {
   background-color: purple;
   width: 80%;
   margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .container-config {
   background-color: cadetblue;
   padding: 20px;
 }
-select {
+.container-config select {
   padding: 10px;
 }
 
 .container-principal {
   background-color: burlywood;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  height: 80%;
+  grid-template-rows: 1fr 1fr;
 }
 
 .lista {
   background-color: red;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border: 1px solid black;
 }
 .lista textarea {
-  height: 80%;
+  height: 200px;
   width: 80%;
+
   /* white-space: pre; */
 }
 
 /* !HIDDEN ELEMENTS */
-#copyMessage {
-  display: none;
+.copy-container {
+  margin-top: 10px;
+  position: relative; /* Set a relative position for the container */
+  display: inline-block; /* Keeps the button and message inline */
 }
+
+.copy-container > button {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  vertical-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#copyMessage {
+  position: absolute; /* Absolutely position the message */
+  top: -10px; /* Adjust as needed to place above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: none; /* Initially hidden */
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
 input[name="personalizado"] {
   opacity: 0;
 }

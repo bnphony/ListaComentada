@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="./main.css">
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- FeatherIcons -->
+    <!-- choose one -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <!-- Main JS -->
     <script src="./main.js"></script>
 </head>
@@ -28,18 +32,23 @@
                     <option value="4">Personalizado</option>
                 </select>
                 <input type="text" name="personalizado" placeholder="!@#$%^&*..." maxlength="1"/>
+                <br/>
+                <input type="checkbox" name="enumerar">
+                <label>Enumerar</label>
             </div>
         </div>
         <div class="container-principal">
             <div class="c-input lista">
                 <h3>Ingrese una Lista</h3>
-                <textarea name="listaSimple" id="idSimple"></textarea>
+                <textarea name="listaSimple" id="idSimple" placeholder="Ingrese una lista..."></textarea>
             </div>
             <div class="c-output lista">
                 <h3>Lista Comentada</h3>
-                <textarea name="listaComentada" id="idComentada"></textarea>
-                <button type="button" class="btnCopy">Copiar Lista</button>
-                <p id="copyMessage">Copied!</p>
+                <textarea name="listaComentada" id="idComentada" placeholder="Resultado Lista Comentada..."></textarea>
+                <div class="copy-container">
+                    <button type="button" class="btnCopy"><i data-feather="copy"></i>&nbsp;Copiar Lista</button>
+                    <p id="copyMessage">Copied!</p>
+                </div>
             </div>
         </div>
     </main>
@@ -48,6 +57,9 @@
         <address>Created by <strong>Bryan</strong></address>
 
     </footer>
+    <script>
+        feather.replace();
+    </script>
     
 </body>
 </html>

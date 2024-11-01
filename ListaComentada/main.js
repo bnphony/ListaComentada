@@ -1,26 +1,31 @@
 let SYMBOL = '*';
-
+let resizeTimeout;
 
 
 function createBoxedText(index, text, symbol, maxLength) {
     const padding = 4;
+    let margin = 3;
     const boxWidth = maxLength + padding * 2;
     let border = symbol.repeat(boxWidth);
     if (symbol === '|') {
         border = '-'.repeat(boxWidth);
     }
-
+    // maxLength = Math.floor(maxLength * 0.9);
     // Truncate text if it exceeds maxLength
     const truncatedText = text.length > maxLength ? text.slice(0, maxLength) : text;
     // Center the text
-    const centeredText = `${symbol} ${truncatedText.padStart((boxWidth - 3 + truncatedText.length) / 2).padEnd(boxWidth - 3)} ${symbol}`;
+    
+    let centeredText = `${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
+    if ($('input[name="enumerar"]').prop('checked')) {
+        margin = 6;
+        centeredText = `${symbol} ${index+1} ${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
+    }
     return `${index === 0 ? border+'\n' : '\n'}${centeredText}\n${border}`;
 }
 
 function convertirLista() {
     const rawText = $(this).val();
     let lines = rawText.split('\n');
-    console.log(lines);
     let sizes = [];
     // Get the visible character width of the textarea for dynamic maxLength adjustment
     const visibleWidth = $(this).width();
@@ -49,6 +54,15 @@ function copyListResult() {
     });
 }
 
+function syncResizeTextarea() {
+    // Capture the dimensions of the first textarea
+    const height1 = $('#idSimple').outerHeight();
+    const width1 = $('#idSimple').outerWidth();
+
+    $('#idComentada').height(height1);
+    $('#idComentada').width(width1); 
+}
+
 
 
 $(function() {
@@ -61,6 +75,10 @@ $(function() {
     $('input[name="personalizado"]').on('input', function() {
         $('#idSimple').trigger('input');
     });
+
+    $('input[name="enumerar"]').on('change', function() {
+        $('#idSimple').trigger('input');
+    });
     
 
     $('select#idBordes').on('change', function() {
@@ -69,5 +87,17 @@ $(function() {
         SYMBOL = $(this).val();
         $('#idSimple').trigger('input');
     });
+
+
+    $('#idSimple, #idComentada').on('resize', syncResizeTextarea);
+
+    
+    
+    const $tArea1 = document.getElementById('idSimple');
+    new ResizeObserver(() => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(syncResizeTextarea, 200); // Cambia el 100 a lo que mejor funcione en tu caso
+    }).observe($tArea1);
+    syncResizeTextarea();
 
 });
