@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Comentada</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./main.css">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Main JS -->
+    <script src="./main.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <li>Lista Comentada</li>
+        </nav>
+    </header>
+    <main>
+        <div class="container-config">
+            <div class="config">
+                <label for="idBordes">Opciones de Bordes: </label>
+                <select id="idBordes" name="select-border" id="">
+                    <option value="|">Tabla</option>
+                    <option value="*">Asteriscos *</option>
+                    <option value="#">Numerales #</option>
+                    <option value="4">Personalizado</option>
+                </select>
+                <input type="text" name="personalizado" placeholder="!@#$%^&*..." maxlength="1"/>
+            </div>
+        </div>
+        <div class="container-principal">
+            <div class="c-input lista">
+                <h3>Ingrese una Lista</h3>
+                <textarea name="listaSimple" id="idSimple"></textarea>
+            </div>
+            <div class="c-output lista">
+                <h3>Lista Comentada</h3>
+                <textarea name="listaComentada" id="idComentada"></textarea>
+                <button type="button" class="btnCopy">Copiar Lista</button>
+                <p id="copyMessage">Copied!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <address>Created by <strong>Bryan</strong></address>
+
+    </footer>
+    
+</body>
+</html>

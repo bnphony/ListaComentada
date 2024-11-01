@@ -1,0 +1,73 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: grey;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  text-align: center;
+}
+/* Header */
+header {
+  min-height: 50px;
+}
+
+/* * PRINCIPAL */
+main {
+  background-color: purple;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.container-config {
+  background-color: cadetblue;
+  padding: 20px;
+}
+select {
+  padding: 10px;
+}
+
+.container-principal {
+  background-color: burlywood;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  height: 80%;
+}
+
+.lista {
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lista textarea {
+  height: 80%;
+  width: 80%;
+  /* white-space: pre; */
+}
+
+/* !HIDDEN ELEMENTS */
+#copyMessage {
+  display: none;
+}
+input[name="personalizado"] {
+  opacity: 0;
+}
+
+/* Footer */
+footer {
+  min-height: 30px;
+  background-color: violet;
+}
