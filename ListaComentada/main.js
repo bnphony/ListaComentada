@@ -12,15 +12,29 @@ function createBoxedText(index, text, symbol, maxLength) {
     }
     // maxLength = Math.floor(maxLength * 0.9);
     // Truncate text if it exceeds maxLength
-    const truncatedText = text.length > maxLength ? text.slice(0, maxLength) : text;
+    const lines = Math.floor(text.length / maxLength) || 1;
+    console.log(lines);
+    let totalText = '';
+    Array.from({length: lines}).forEach((_, i) => {
+        console.log('hola', i);
+        let truncatedText = '';
+        if (text.length > maxLength) {
+            truncatedText = text.slice(0, maxLength);
+            text = text.slice(maxLength);
+        } else {
+            truncatedText = text;
+        }
+        let centeredText = `${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
+        if ($('input[name="enumerar"]').prop('checked')) {
+            margin = 6;
+            centeredText = `${symbol} ${i===Math.floor(lines / 2) ? index+1 : ' '} ${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
+        }
+        totalText += centeredText + '\n';
+    });
+    // const truncatedText = text.length > maxLength ? text.slice(0, maxLength) : text;
     // Center the text
     
-    let centeredText = `${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
-    if ($('input[name="enumerar"]').prop('checked')) {
-        margin = 6;
-        centeredText = `${symbol} ${index+1} ${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
-    }
-    return `${index === 0 ? border+'\n' : '\n'}${centeredText}\n${border}`;
+    return `${index === 0 ? border+'\n' : '\n'}${totalText}${border}`;
 }
 
 function convertirLista() {
