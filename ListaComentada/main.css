@@ -57,8 +57,15 @@ main {
 .lista textarea {
   height: 200px;
   width: 80%;
-
   /* white-space: pre; */
+}
+
+#idComentada {
+  resize: none;
+}
+
+.c-sizes {
+  margin-top: 10px;
 }
 
 /* !HIDDEN ELEMENTS */

@@ -1,41 +1,39 @@
 let SYMBOL = '*';
 let resizeTimeout;
-
+const SIZES = [[800, 300], [360, 440]];
 
 function createBoxedText(index, text, symbol, maxLength) {
     const padding = 4;
-    let margin = 3;
+    maxLength -= 4;
     const boxWidth = maxLength + padding * 2;
-    let border = symbol.repeat(boxWidth);
-    if (symbol === '|') {
-        border = '-'.repeat(boxWidth);
+    const isEnumerated = $('input[name="enumerar"]').prop('checked');
+    let borderBoxWidth = isEnumerated ? boxWidth + 3 : boxWidth;
+    let border = symbol === '|' ? '-'.repeat(borderBoxWidth) : symbol.repeat(borderBoxWidth);
+    const indexWidth = isEnumerated ? index.toString().length : 0;
+    const labelMargin = indexWidth + 3; // 3 spaces for padding
+
+    // Split text into chunks based on maxLength
+    const textChunks = [];
+    while (text.length > 0) {
+        textChunks.push(text.slice(0, maxLength));
+        text = text.slice(maxLength);
     }
-    // maxLength = Math.floor(maxLength * 0.9);
-    // Truncate text if it exceeds maxLength
-    const lines = Math.floor(text.length / maxLength) || 1;
-    console.log(lines);
-    let totalText = '';
-    Array.from({length: lines}).forEach((_, i) => {
-        console.log('hola', i);
-        let truncatedText = '';
-        if (text.length > maxLength) {
-            truncatedText = text.slice(0, maxLength);
-            text = text.slice(maxLength);
-        } else {
-            truncatedText = text;
-        }
-        let centeredText = `${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
-        if ($('input[name="enumerar"]').prop('checked')) {
-            margin = 6;
-            centeredText = `${symbol} ${i===Math.floor(lines / 2) ? index+1 : ' '} ${symbol} ${truncatedText.padStart((boxWidth - margin + truncatedText.length) / 2).padEnd(boxWidth - margin)} ${symbol}`;
-        }
-        totalText += centeredText + '\n';
-    });
-    // const truncatedText = text.length > maxLength ? text.slice(0, maxLength) : text;
-    // Center the text
-    
-    return `${index === 0 ? border+'\n' : '\n'}${totalText}${border}`;
+
+    // Generate each line
+    const totalText = textChunks.map((chunk, i) => {
+        const isMiddleLine = i === Math.floor(textChunks.length / 2);
+        const nDigits = index + 1 < 10 ? 3 : 4;
+        const label = isEnumerated && isMiddleLine 
+            ? `${index + 1} ${symbol}`.padEnd(labelMargin) : isEnumerated 
+            ? `${symbol}`.padStart(nDigits).padEnd(labelMargin) : '';
+        const centeredText = chunk.padStart((boxWidth - labelMargin) / 2 + chunk.length / 2).padEnd(boxWidth - labelMargin);
+        return `${symbol} ${label}${centeredText} ${symbol}`;
+    }).join('\n');
+
+    return `${index === 0 ? border + '\n' : '\n'}${totalText}\n${border}`;
 }
+
+
 
 function convertirLista() {
     const rawText = $(this).val();
@@ -78,6 +76,18 @@ function syncResizeTextarea() {
 }
 
 
+function changeTextAreaSize() {
+    const value = parseInt($(this).val());
+    
+    // Check if the value is valid and not equal to -1
+    if (value !== -1 && !isNaN(value)) {
+        const [width, height] = SIZES[value]; // Destructure the width and height
+
+        // Set the dimensions of the textarea
+        $('#idSimple').css({ width, height }).trigger('input');
+    }
+}
+
 
 $(function() {
     SYMBOL = $('select#idBordes').val();
@@ -105,8 +115,6 @@ $(function() {
 
     $('#idSimple, #idComentada').on('resize', syncResizeTextarea);
 
-    
-    
     const $tArea1 = document.getElementById('idSimple');
     new ResizeObserver(() => {
         clearTimeout(resizeTimeout);
@@ -114,4 +122,7 @@ $(function() {
     }).observe($tArea1);
     syncResizeTextarea();
 
+
+    $('select#idSizes').on('change', changeTextAreaSize);
+    $('select#idSizes').val('-1');
 });

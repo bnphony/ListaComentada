@@ -25,16 +25,25 @@
         <div class="container-config">
             <div class="config">
                 <label for="idBordes">Opciones de Bordes: </label>
-                <select id="idBordes" name="select-border" id="">
+                <select id="idBordes" name="select-border">
                     <option value="|">Tabla</option>
                     <option value="*">Asteriscos *</option>
                     <option value="#">Numerales #</option>
                     <option value="4">Personalizado</option>
                 </select>
                 <input type="text" name="personalizado" placeholder="!@#$%^&*..." maxlength="1"/>
-                <br/>
-                <input type="checkbox" name="enumerar">
-                <label>Enumerar</label>
+                <div class="c-sizes">
+                    <label for="idSizes">Dimensiones de Pantalla: </label>
+                    <select name="select-sizes" id="idSizes">
+                        <option value="-1">Seleccione el tamaño deseado....</option>
+                        <option value="0">Desktop (800 x 1280)</option>
+                        <option value="1">Cellphone (360 x 640)</option>
+                    </select>
+                    <label>
+                        <input type="checkbox" name="enumerar">
+                        Enumerar
+                    </label>
+                </div>
             </div>
         </div>
         <div class="container-principal">
