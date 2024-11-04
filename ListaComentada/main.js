@@ -1,6 +1,8 @@
 let SYMBOL = '*';
 let resizeTimeout;
 const SIZES = [[800, 300], [360, 440]];
+let alineacion = -1;
+let visible = false;
 
 function createBoxedText(index, text, symbol, maxLength) {
     const padding = 4;
@@ -18,7 +20,7 @@ function createBoxedText(index, text, symbol, maxLength) {
         textChunks.push(text.slice(0, maxLength));
         text = text.slice(maxLength);
     }
-
+    
     // Generate each line
     const totalText = textChunks.map((chunk, i) => {
         const isMiddleLine = i === Math.floor(textChunks.length / 2);
@@ -26,14 +28,17 @@ function createBoxedText(index, text, symbol, maxLength) {
         const label = isEnumerated && isMiddleLine 
             ? `${index + 1} ${symbol}`.padEnd(labelMargin) : isEnumerated 
             ? `${symbol}`.padStart(nDigits).padEnd(labelMargin) : '';
-        const centeredText = chunk.padStart((boxWidth - labelMargin) / 2 + chunk.length / 2).padEnd(boxWidth - labelMargin);
+
+        const aligns = [chunk.padEnd(boxWidth - labelMargin), 
+            chunk.padStart((boxWidth - labelMargin) / 2 + chunk.length / 2).padEnd(boxWidth - labelMargin),
+            chunk.padStart(boxWidth - labelMargin)];
+        console.log('alineacion: ', typeof alineacion);
+        const centeredText = alineacion === -1 ? aligns[0] : alineacion === 0 ? aligns[1] : aligns[2];
         return `${symbol} ${label}${centeredText} ${symbol}`;
     }).join('\n');
 
     return `${index === 0 ? border + '\n' : '\n'}${totalText}\n${border}`;
 }
-
-
 
 function convertirLista() {
     const rawText = $(this).val();
@@ -57,15 +62,18 @@ function convertirLista() {
     $('#idComentada').val(listaComentada);
 }
 
+// Copy the result List to paste in any place
 function copyListResult() {
     const textToCopy = $('#idComentada').val();
-    navigator.clipboard.writeText(textToCopy).then(() => {
+    const modifiedText =  "```\n" + textToCopy + "\n```";
+    navigator.clipboard.writeText(modifiedText).then(() => {
         $('#copyMessage').fadeIn(300).delay(1000).fadeOut(300);
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
 }
 
+// The second textarea must change the size accordingly the first
 function syncResizeTextarea() {
     // Capture the dimensions of the first textarea
     const height1 = $('#idSimple').outerHeight();
@@ -76,22 +84,50 @@ function syncResizeTextarea() {
 }
 
 
+
+// Select the preferred screen size
 function changeTextAreaSize() {
     const value = parseInt($(this).val());
-    
     // Check if the value is valid and not equal to -1
     if (value !== -1 && !isNaN(value)) {
         const [width, height] = SIZES[value]; // Destructure the width and height
-
         // Set the dimensions of the textarea
         $('#idSimple').css({ width, height }).trigger('input');
     }
 }
 
 
+// Make the config container to fixed
+function fixConfig($c, top) {
+    if (window.scrollY >= top) {
+        document.body.style.paddingTop = $c.offsetHeight + 'px';
+        document.body.classList.add('fixed-config');
+    } else {
+        document.body.style.paddingTop = 0;
+        document.body.classList.remove('fixed-config');
+    }
+}
+
+function showInstrucciones() {
+    const $tooltip = document.querySelector('.tooltip');
+    $tooltip.classList.add('open');
+    const instructCoords = this.getBoundingClientRect();
+    const [top, left] = [instructCoords.top, instructCoords.left];
+
+    $tooltip.style.setProperty('transform', `
+        translate(${left}px, ${top}px)`);
+}
+
 $(function() {
     SYMBOL = $('select#idBordes').val();
     $('#idSimple').on('input', convertirLista);
+
+    $('input[name="alineacion"]').on('change', function() {
+        if($(this).prop('checked')) {
+            alineacion = $(this).data('id');
+            $('#idSimple').trigger('input');
+        }
+    });
 
     $('.btnCopy').on('click', copyListResult);
 
@@ -125,4 +161,18 @@ $(function() {
 
     $('select#idSizes').on('change', changeTextAreaSize);
     $('select#idSizes').val('-1');
+
+
+    // ToolTip
+    $('.instrucciones').on('mouseenter', showInstrucciones);
+    $('.instrucciones').on('mouseleave', function() {
+        $('.tooltip').removeClass('open');
+    });
+    
+
+    // Change the container-config tofixed
+    const $config = document.querySelector('.container-config');
+    const topOfNav = $config.offsetHeight;
+
+    window.addEventListener('scroll', () => fixConfig($config, topOfNav));
 });

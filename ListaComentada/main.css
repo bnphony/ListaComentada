@@ -1,3 +1,10 @@
+:root {
+  --color-fondo: #243642;
+  --color1: #387478;
+  --color2: #e2f1e7;
+  --color-resalta: #629584;
+}
+
 html {
   box-sizing: border-box;
   font-family: sans-serif;
@@ -11,15 +18,25 @@ html {
 
 body {
   margin: 0;
-  background-color: grey;
+  background-color: var(--color-fondo);
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
   text-align: center;
+  font-family: "Trade Winds", Arial, Helvetica, sans-serif;
+  font-style: normal;
 }
 /* Header */
 header {
   min-height: 50px;
+  display: inline-block;
+  font-size: 30px;
+  padding: 20px;
+  color: white;
+}
+
+header > nav > li {
+  list-style: none;
 }
 
 /* * PRINCIPAL */
@@ -32,11 +49,30 @@ main {
 }
 
 .container-config {
-  background-color: cadetblue;
+  background-color: var(--color-resalta);
   padding: 20px;
+  top: 0;
+  transition: all 0.5s;
+  position: relative;
+  z-index: 1;
+  color: white;
 }
+
+.fixed-config .container-config {
+  position: fixed;
+  width: 80%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
 .container-config select {
   padding: 10px;
+  cursor: pointer;
+  font-family: "Trade Winds";
+}
+
+.container-config select option {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
 }
 
 .container-principal {
@@ -46,18 +82,30 @@ main {
 }
 
 .lista {
-  background-color: red;
+  background-color: var(--color1);
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border: 1px solid black;
+  color: white;
 }
 .lista textarea {
   height: 200px;
   width: 80%;
   /* white-space: pre; */
+}
+
+.c-input {
+  position: relative;
+}
+
+.instrucciones {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: help;
 }
 
 #idComentada {
@@ -66,6 +114,43 @@ main {
 
 .c-sizes {
   margin-top: 10px;
+}
+
+.c-sizes select,
+.c-sizes label[for="idEnumerar"] {
+  cursor: pointer;
+}
+
+/* * ALINEAR * */
+.alinear {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.alinear > span {
+  margin-right: 10px;
+}
+
+.custom-radio {
+  display: none;
+}
+.icon-label {
+  display: inline-block;
+  cursor: pointer;
+  padding-inline: 5px;
+  padding-top: 10px;
+  font-size: 24px;
+  color: #b4b4b4;
+  transition: transform 0.2s, color 0.2s;
+  background-color: rgb(221, 221, 221);
+  border-radius: 5px;
+}
+
+.custom-radio:checked + .icon-label {
+  color: #3f3f3f;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* !HIDDEN ELEMENTS */
@@ -83,6 +168,7 @@ main {
   vertical-align: center;
   padding: 5px;
   cursor: pointer;
+  font-family: "Trade Winds";
 }
 
 #copyMessage {
@@ -103,8 +189,24 @@ input[name="personalizado"] {
   opacity: 0;
 }
 
+.tooltip {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  border-radius: 10px;
+  opacity: 0;
+  left: 30px;
+}
+
+.tooltip.open {
+  opacity: 1;
+}
+
 /* Footer */
 footer {
   min-height: 30px;
-  background-color: violet;
+  margin-top: 20px;
+  background-color: var(--color2);
+  padding: 10px;
 }

@@ -6,6 +6,10 @@
     <title>Lista Comentada</title>
     <!-- Main CSS -->
     <link rel="stylesheet" href="./main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Trade+Winds&display=swap" rel="stylesheet">
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- FeatherIcons -->
@@ -35,19 +39,36 @@
                 <div class="c-sizes">
                     <label for="idSizes">Dimensiones de Pantalla: </label>
                     <select name="select-sizes" id="idSizes">
-                        <option value="-1">Seleccione el tamaño deseado....</option>
+                        <option value="-1">Seleccione el tamaño....</option>
                         <option value="0">Desktop (800 x 1280)</option>
                         <option value="1">Cellphone (360 x 640)</option>
                     </select>
-                    <label>
-                        <input type="checkbox" name="enumerar">
+                    <label for="idEnumerar">
+                        <input type="checkbox" id="idEnumerar" name="enumerar">
                         Enumerar
+                    </label>
+                </div>
+                <!-- * ALINEAR -->
+                <div class="alinear">
+                    <span>Alinear: </span>
+                    <input id="rIzquierda" type="radio" data-id="-1" name="alineacion" class="custom-radio" checked>
+                    <label for="rIzquierda" class="icon-label">
+                        <i data-feather="align-left" class="icon"></i>
+                    </label>
+                    <input id="rCentro" type="radio" data-id="0" name="alineacion" class="custom-radio">
+                    <label for="rCentro" class="icon-label">
+                        <i data-feather="align-center" class="icon"></i>
+                    </label>
+                    <input id="rDerecha" type="radio" data-id="1" name="alineacion" class="custom-radio">
+                    <label for="rDerecha" class="icon-label">
+                        <i data-feather="align-right" class="icon"></i>
                     </label>
                 </div>
             </div>
         </div>
         <div class="container-principal">
             <div class="c-input lista">
+                <span class="instrucciones"><i data-feather="help-circle"></i></span>
                 <h3>Ingrese una Lista</h3>
                 <textarea name="listaSimple" id="idSimple" placeholder="Ingrese una lista..."></textarea>
             </div>
@@ -66,6 +87,9 @@
         <address>Created by <strong>Bryan</strong></address>
 
     </footer>
+    <div class="tooltip">
+
+    </div>
     <script>
         feather.replace();
     </script>
