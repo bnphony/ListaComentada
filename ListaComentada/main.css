@@ -191,14 +191,25 @@ input[name="personalizado"] {
 
 .tooltip {
   position: absolute;
-  width: 100px;
-  height: 50px;
+  width: 350px;
+  height: auto;
   background-color: white;
   border-radius: 10px;
   opacity: 0;
   left: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.tooltip > ul > p {
+  font-weight: bold;
+}
+
+.tooltip > ul {
+  padding-left: 20px;
+}
 .tooltip.open {
   opacity: 1;
 }

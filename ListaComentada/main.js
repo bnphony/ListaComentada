@@ -109,13 +109,15 @@ function fixConfig($c, top) {
 }
 
 function showInstrucciones() {
-    const $tooltip = document.querySelector('.tooltip');
-    $tooltip.classList.add('open');
-    const instructCoords = this.getBoundingClientRect();
-    const [top, left] = [instructCoords.top, instructCoords.left];
+    const $tooltip = $('.tooltip');
+    $tooltip.addClass('open');
 
-    $tooltip.style.setProperty('transform', `
-        translate(${left}px, ${top}px)`);
+    const instructCoords = $(this).offset();
+    const top = instructCoords.top;
+    const left = instructCoords.left;
+
+    $tooltip.css('transform', `translate(${left}px, ${top}px)`);
+
 }
 
 $(function() {
@@ -164,7 +166,13 @@ $(function() {
 
 
     // ToolTip
-    $('.instrucciones').on('mouseenter', showInstrucciones);
+    $('.instrucciones').on('mouseenter click', showInstrucciones);
+    $(document).on('click touchstart', function(e) {
+        // Si si se hizo un click fuera de .instrucciones o .tooltip
+        if (!$(e.target).closest('.instrucciones, .tooltip').length) {
+            $('.tooltip').removeClass('open');
+        }
+    })
     $('.instrucciones').on('mouseleave', function() {
         $('.tooltip').removeClass('open');
     });
