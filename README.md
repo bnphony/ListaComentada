@@ -4,7 +4,8 @@
 </div>
 
 <div align="center">
-  
+  <img src="https://raw.githubusercontent.com/bnphony/ListaComentada/deployed/img/general.PNG" width="80%" alt="Configuration Panel">
+
   ![GitHub](https://img.shields.io/github/last-commit/bnphony/ListaComentada)
   [![JavaScript](https://img.shields.io/badge/Code-JavaSript-orange)](https://developer.mozilla.org/es/docs/Web/JavaScript)
   [![JQuery](https://img.shields.io/badge/Code-JQuery-0769ad)](https://jquery.com/)  
@@ -19,15 +20,13 @@
      - [Tecnologías](#tecnologías)
   - [Dominio](#dominio)
      - [Configuración](#configuración)
-     - [Operación Completa](#operación-completa)
-     - [Números Secuenciales](#números-secuenciales)
-     - [Calcular Vuelto](#calcular-vuelto)
+     - [Lista Simple](#lista-simple)
+     - [Lista Comentada](#lista-comentada)
   - [Funciones](#funciones)
-     - [Sitio de la Aplicación](#sitio-de-la-aplicación)
+     - [Sitio de la Aplicación Web](#sitio-de-la-aplicación-web)
   - [Autor](#autor)
      - [Contacto](#contacto)
   - [Licencia de Uso](#licencia-de-uso)
-
 ## Descripción
 Aplicación Web para convertir una lista simple en un ranking(top) decorado con el signo que deseé el usuario. Funciones principales:
 - Los bordes pueden ser cualquier signo que ingrese el usuario.
@@ -73,9 +72,9 @@ Cualquier usuario puede utilizar la aplicación web, la única regla a considera
     <td witdh="100%">
       <h3 align="center">Panel de Configuración</h3>
       <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/ListaComentada/deployed/img/general.PNG" width="80%" alt="Configuration Panel">
+        <img src="https://raw.githubusercontent.com/bnphony/ListaComentada/deployed/img/configuration.PNG" width="80%" alt="Configuration Panel">
         <p>
-          - Opciones de Configuración: Tipo de Operación, Modo de Juego, Número de Rondas, Cantidad de Números, Cantidad de Dígitos.
+          - Opciones de Configuración: Tipo de Bordes, Dimensiones de pantalla recomendados, Enumerar las líneas, Alinear el contenido.
         </p>
       </div>
     </td>
@@ -84,11 +83,11 @@ Cualquier usuario puede utilizar la aplicación web, la única regla a considera
   
   <tr>
     <td witdh="100%">
-      <h3 align="center">Operación Completa</h3>
+      <h3 align="center">Lista Simple</h3>
       <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/Suma-Mental/deployed/static/img/Operacion_Completa.PNG" width="80%" alt="Splash Screen">
+        <img src="https://raw.githubusercontent.com/bnphony/ListaComentada/deployed/img/list_input.PNG" width="80%" alt="List Input">
         <p>
-          - Todos los números se presenta en pantalla.
+          - Se puede ingresar cualquier texto, pero cada línea se considera un elemento del ranking final.
         </p>
       </div>
     </td>
@@ -97,59 +96,20 @@ Cualquier usuario puede utilizar la aplicación web, la única regla a considera
   
   <tr>
     <td witdh="100%">
-      <h3 align="center">Números Secuenciales</h3>
+      <h3 align="center">Lista Resultado</h3>
       <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/Suma-Mental/deployed/static/img/Secuencial.PNG" width="80%" alt="Splash Screen">
+        <img src="https://raw.githubusercontent.com/bnphony/ListaComentada/deployed/img/list_output.PNG" width="80%" alt="List Output">
         <p>
-          - Los números son presentados uno por uno secuencialmente.
+          - Ranking Final con todas las configuraciones aplicadas.
         </p>
       </div>
     </td>
-  </tr>
-
-  <tr>
-    <td witdh="100%">
-      <h3 align="center">Calcular Vuelto</h3>
-      <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/Suma-Mental/deployed/static/img/Vuelto.PNG" width="80%" alt="Splash Screen">
-        <p>
-          - El sistema presenta la cantidad a cobrar, el pago del cliente (dólares y centavos). El usuario debe calcular el pago del cliente y la cantidad a devolver.
-        </p>
-      </div>
-    </td>
-    
-  </tr>
-  <tr>
-    <td witdh="100%">
-      <h3 align="center">Ejercicios Resueltos</h3>
-      <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/Suma-Mental/deployed/static/img/Resultados_1.PNG" width="80%" alt="Splash Screen">
-        <p>
-          - Resultados: Ejercicios resultados por el usuario, la respuesta enviada y su valoración.
-        </p>
-      </div>
-    </td>
-    
-  </tr>
-
-  <tr>
-    <td witdh="100%">
-      <h3 align="center">Gráfico de los Resultados</h3>
-      <div align="center">
-        <img src="https://raw.githubusercontent.com/bnphony/Suma-Mental/deployed/static/img/Resultados_2.PNG" width="80%" alt="Splash Screen">
-        <p>
-          - Gráfico de Barras: Número de respuestas correctas, incorrectas y sin respuesta.<br/>
-          - Gráfico de Sectores (Pastel): Porcentaje de respuestas correctas, incorrectas y sin respuesta.
-        </p>
-      </div>
-    </td>
-    
   </tr>
 </table>
 
-### Sitio de la Aplicación
+### Sitio de la Aplicación Web
 
-[Link de la aplicación](https://bnphony.github.io/Suma-Mental/)
+[Link de la aplicación](https://bnphony.github.io/ListaComentada/)
 
 
 
